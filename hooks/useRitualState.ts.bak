@@ -1,0 +1,38 @@
+// hooks/useRitualState.ts
+"use client";
+import { useState, useEffect } from 'react';
+
+export const useRitualState = (durationInSeconds: number) => {
+  const [endTime, setEndTime] = useState<number | null>(null);
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    // ดึงเวลาที่จุดธูปค้างไว้จากเครื่องผู้ใช้
+    const saved = localStorage.getItem('altar_incense_end');
+    if (saved) setEndTime(parseInt(saved));
+  }, []);
+
+  const startRitual = () => {
+    const end = Date.now() + durationInSeconds * 1000;
+    localStorage.setItem('altar_incense_end', end.toString());
+    setEndTime(end);
+  };
+
+  useEffect(() => {
+    if (!endTime) return;
+
+    const interval = setInterval(() => {
+      const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
+      setTimeLeft(remaining);
+      
+      if (remaining === 0) {
+        localStorage.removeItem('altar_incense_end');
+        setEndTime(null);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [endTime]);
+
+  return { timeLeft, startRitual, isActive: timeLeft > 0 };
+};
