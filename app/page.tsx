@@ -11,6 +11,7 @@ import IncenseBurner from '../components/IncenseBurner';
  */
 const DEITY_DATA = [
   { id: "buddha", label: "พระพุทธรูปทองคำ", url: "/images/buddha_gold.png", audio: "/sounds/buddha.mp3" },
+  { id: "lindam", label: "หลวงพ่อฤาษีลิงดำ", url: "/images/lindam.png", audio: "/sounds/lindam.mp3" },
   { id: "ganesha", label: "พระพิฆเนศ", url: "/images/ganesha.png", audio: "/sounds/ganesha.mp3" },
   { id: "lucksamee", label: "พระแม่ลักษมี", url: "/images/lucksamee.png", audio: "/sounds/lucksamee.mp3" },
   { id: "chaishen", label: "เทพเจ้าไฉ่ซิงเอี้ย", url: "/images/chaishen.png", audio: "/sounds/chaishen.mp3" },
